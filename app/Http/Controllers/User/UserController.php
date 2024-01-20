@@ -30,7 +30,7 @@ class UserController extends Controller
            @unlink('frontend_upload/user_upload/'.$userData->photo);
             Image::make($image)->resize(250,250)->save('frontend_upload/user_upload/'.$name_gen);
             $userData['photo'] = $name_gen;
-        }
+        }//End Method
         $userData->save();
         $notification = array(
             'message' =>'Profile Update  Successfully',

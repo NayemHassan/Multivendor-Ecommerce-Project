@@ -22,6 +22,7 @@ use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\User\AllUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -281,10 +282,21 @@ Route::middleware(['auth','role:admin'])->group(function (){
     Route::get('/shipping-state-ajax/{district_id}','ShippingState');  
     Route::post('/checkout/store','StoreCheckout')->name('store.checkout');  
     });
+    //Stripe Controller
    Route::controller(StripeController::class)->group(function(){
     Route::post('/stripe/order','StripeOrder')->name('stripe.order');  
     Route::post('/cash/order','CashOrder')->name('cash.order');
-});
+    });
+    //All User Controller
+   Route::controller(AllUserController::class)->group(function(){
+    Route::get('/user/account/details','UserDatails')->name('user.details.page');  
+    Route::get('/user/account/password','UserPassword')->name('user.password.page');  
+    Route::get('/user/account/address','UserAddress')->name('user.address.page');  
+    Route::get('/user/track/order','UserTrackOrder')->name('user.track.order.page');  
+    Route::get('/user/order','UserOrder')->name('user.order.page');  
+    Route::get('/user/dashboard/page','UserDashboard')->name('user.dashboard.page');  
+ 
+    });
 
     });//end middleware    
 

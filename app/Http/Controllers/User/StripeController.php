@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\OrderMail;
 use Carbon\Carbon;
+use App\Jobs\SendMailJob;
 use Auth;
 class StripeController extends Controller
 {
@@ -31,6 +32,7 @@ class StripeController extends Controller
           'source' => $token,
           'metadata' => ['order_id' => uniqid()],
         ]);
+
       //  dd($charge);
         $order_id = orders::insertGetId([
           'user_id' => Auth::id(),
@@ -57,6 +59,8 @@ class StripeController extends Controller
           'status' => 'pending',
           'created_at' =>Carbon::now(),
         ]);
+
+
         //Order mail Send Start
         $invoice = orders::findOrfail($order_id);
         $data = [
@@ -65,11 +69,14 @@ class StripeController extends Controller
           'name' => $invoice->name,
           'email' => $invoice->email,
         ];
-        Mail::to($request->email)->send(new OrderMail($data));
-        //Order mail Send End
-      //  return $this->from('NayemSupportEasyShop@gmail.com')->view('mail.mail_view',compact('order'))->subject('Email Send From Easy Multivendor Shop') ;
-       
 
+        Mail::to($request->email)->send(new OrderMail($data));
+
+        //Order mail Send End
+      
+       
+       // dispatch(new SendMailJob((object)$request->all()));
+       
         $carts = Cart::Content();
 
         foreach($carts as $cart){
@@ -95,13 +102,15 @@ class StripeController extends Controller
       );
       return redirect()->route('dashboard')->with($notification);
     }//End Method
+
+
     public function CashOrder( Request $request){
       if(Session::has('coupon')){
           $total_amount = Session::get('coupon')['total_amount'];
       }else{
         $total_amount = round(Cart::total());
       }
-       
+      
       //  dd($charge);
         $order_id = orders::insertGetId([
           'user_id' => Auth::id(),
@@ -126,6 +135,8 @@ class StripeController extends Controller
           'status' => 'pending',
           'created_at' =>Carbon::now(),
         ]);
+
+        
         //order Mail Send
         $invoice = orders::findOrfail($order_id);
         $data = [
@@ -134,7 +145,14 @@ class StripeController extends Controller
           'name' => $invoice->name,
           'email' => $invoice->email,
         ];
+
+
+
+      //  dispatch(new SendMailJob((object)$request->all(),$data));
+
+      //dispatch(new SendMailjob($data,$request));
         Mail::to($request->email)->send(new OrderMail($data));
+       
         //Order mail Send End
         $carts = Cart::Content();
         foreach($carts as $cart){

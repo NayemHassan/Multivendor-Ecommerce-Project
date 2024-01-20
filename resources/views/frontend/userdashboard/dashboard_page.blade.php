@@ -13,9 +13,9 @@
                 <div class="row">
                     <div class="col-lg-12 m-auto">
                         <div class="row">
-                            @include('frontend.body.dashboard_side_menu')
-                                    
-                            <div class="col-md-9">
+                          @include('frontend.body.dashboard_side_menu')
+
+                                    <div class="col-md-9">
                                     <div class="tab-content account dashboard-content pl-50">
                                   
                                     <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">

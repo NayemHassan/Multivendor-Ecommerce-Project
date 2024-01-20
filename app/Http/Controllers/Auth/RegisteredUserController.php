@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Log;
 
 class RegisteredUserController extends Controller
 {
@@ -41,11 +42,16 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        try {
+            event(new Registered($user));
 
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+            Auth::login($user);
+    
+            return redirect(RouteServiceProvider::HOME);
+        } catch (\Exception $e) {
+            // Log the email delivery error
+            Log::error('Email delivery failed: ' . $e->getMessage());
+        }
+    
     }
 }
