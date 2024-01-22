@@ -13,25 +13,21 @@ use Mail;
 class SendMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-//public $request;
-   // public $data;
-   //
+      protected $data;
     /**
      * Create a new job instance.
      */
-   // public  $data;
-    public function __construct($request,$data)
+  
+    public function __construct($data)
     {
-    //  $this->request = $request;
-      // $this->data = $data;
+        $this->data = $data;
     }
-
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-      //dd($data);
-     // Mail::to($this->request->email)->send(new OrderMail($this->data,$this->request));
+
+      Mail::to($this->data['email'])->send(new OrderMail($this->data));
     }
 }

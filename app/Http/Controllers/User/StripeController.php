@@ -70,12 +70,11 @@ class StripeController extends Controller
           'email' => $invoice->email,
         ];
 
-        Mail::to($request->email)->send(new OrderMail($data));
+        //Mail::to($request->email)->send(new OrderMail($data));
 
         //Order mail Send End
-      
-       
-       // dispatch(new SendMailJob((object)$request->all()));
+      //Queue
+        dispatch(new SendMailJob($data));
        
         $carts = Cart::Content();
 
@@ -147,11 +146,8 @@ class StripeController extends Controller
         ];
 
 
-
-      //  dispatch(new SendMailJob((object)$request->all(),$data));
-
-      //dispatch(new SendMailjob($data,$request));
-        Mail::to($request->email)->send(new OrderMail($data));
+        dispatch(new SendMailJob($data));
+     //   Mail::to($request->email)->send(new OrderMail($data));
        
         //Order mail Send End
         $carts = Cart::Content();

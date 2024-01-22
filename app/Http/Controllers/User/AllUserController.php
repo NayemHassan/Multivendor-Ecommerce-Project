@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Image;
+use App\Models\orders;
+use App\Models\OrderItem;
+use Barryvdh\DomPDF\Facade\Pdf;
 class AllUserController extends Controller
 {
    public function UserDatails(){
@@ -26,11 +29,24 @@ class AllUserController extends Controller
     return view('frontend.userdashboard.track_order');
    }//End Method
    public function UserOrder(){
-    return view('frontend.userdashboard.order_page');
+   $order= orders::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get();
+
+    return view('frontend.userdashboard.order_page',compact('order'));
    }//End Method
-   public function UserDashboard(){
-    $id = Auth::user()->id;
-    $userData = User::find($id);
-    return view('frontend.userdashboard.dashboard_page',compact('userData'));
+
+   public function OrderDetails($id){
+    $detailsOrder= orders::with('division','district','state')->where('user_id',Auth::user()->id)->where('id',$id)->orderBy('id','DESC')->first();
+    $orderItem = OrderItem::with('product','vendor')->where('order_id',$id)->orderBy('id','DESC')->get();
+    return view('frontend.userdashboard.order_Details',compact('detailsOrder','orderItem'));
+   }//End Method
+   public function OrderInvoice($id){
+    $detailsOrder= orders::with('division','district','state')->where('user_id',Auth::user()->id)->where('id',$id)->orderBy('id','DESC')->first();
+    $orderItem = OrderItem::with('product','vendor')->where('order_id',$id)->orderBy('id','DESC')->get();
+    $pdf = Pdf::loadView('frontend.userdashboard.order_invoice',compact('detailsOrder','orderItem'))->setPaper('a4')->setOption([
+        'teamDir' => public_path(), 
+        'chroot' => public_path(), 
+    ]); 
+    return $pdf->download('invoice.pdf');
+    
    }//End Method
 }

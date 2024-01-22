@@ -293,8 +293,9 @@ Route::middleware(['auth','role:admin'])->group(function (){
     Route::get('/user/account/password','UserPassword')->name('user.password.page');  
     Route::get('/user/account/address','UserAddress')->name('user.address.page');  
     Route::get('/user/track/order','UserTrackOrder')->name('user.track.order.page');  
-    Route::get('/user/order','UserOrder')->name('user.order.page');  
-    Route::get('/user/dashboard/page','UserDashboard')->name('user.dashboard.page');  
+    Route::get('/user/order','UserOrder')->name('user.order.page'); 
+    Route::get('/user/order/details/{id}','OrderDetails')->name('user/order/details');  
+    Route::get('user/invoice/pdf/{id}','OrderInvoice');  
  
     });
 

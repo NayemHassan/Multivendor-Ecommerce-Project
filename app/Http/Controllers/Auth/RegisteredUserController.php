@@ -42,6 +42,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+    //   dispatch(new RegisterJob((object)$request->all()));
         try {
             event(new Registered($user));
 
