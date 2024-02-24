@@ -89,5 +89,14 @@ class IndexController extends Controller
       $products = Product::where('product_name', 'LIKE', "%$item%")->get();
 
       return view('frontend.product.product_search', compact('products', 'item', 'category', 'new_product'));
+   }//End method ProductSearch
+   public function ProductSearchAjax(Request $request){
+      $request->validate([
+        'search' =>'required',
+      ]);
+      $item = $request->search;
+      $products = Product::where('product_name', 'LIKE', "%$item%")->select('product_name','product_slug','selling_price','product_thumbnail','id')->limit(6)->get();
+
+      return view('frontend.product.product_search_ajax', compact('products'));
    }
 }

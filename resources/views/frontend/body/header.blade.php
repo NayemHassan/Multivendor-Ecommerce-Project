@@ -76,9 +76,32 @@
                                     <option>Noodles & Rice</option>
                                     <option>Ice cream</option>
                                 </select>
-                                <input name="search"  placeholder="Search for items..." />
+                                <input name="search" id="search" onfocus="search_result_show()" onblur="search_result_hide()" placeholder="Search for items..." />
+                                <div id="productSearch"></div>
                             </form>
                         </div>
+                        <!-- Here Some Code For Searching -->
+                        <style>
+                            #productSearch{
+                                position: absolute;
+                                top: 100%;
+                                left: 0;
+                                width: 100%;
+                                background:#fff;
+                                z-index: 9999;
+                                border-radius: 5px;
+                                margin-top: 5px;
+                            }
+                        </style>
+                        <script>
+                            function search_result_show(){
+                                $("#productSearch").slideDown();
+                            }
+                            function search_result_hide(){
+                                $("#productSearch").slideUp();
+                            }
+                        </script>
+                         <!-- Here Some Code For Searching -->
                         <div class="header-action-right">
                             <div class="header-action-2">
                                 <div class="search-location">

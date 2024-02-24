@@ -20,8 +20,9 @@
     <!-- Template  JS -->
     <script src="{{asset('backend')}}/assets/js/main.js?v=5.3"></script>
     <script src="{{asset('backend')}}/assets/js/shop.js?v=5.3"></script>
+    <script src="{{asset('backend')}}/assets/js/script_search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     <script>

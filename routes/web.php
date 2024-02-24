@@ -313,6 +313,8 @@ Route::middleware(['auth','role:admin'])->group(function (){
   //Search Route 
   Route::controller(IndexController::class)->group(function(){
     Route::post('/search','ProductSearch')->name('product.search');
+    Route::post('/search-product','ProductSearchAjax')->name('product.search.ajax');
+    
 });
 require __DIR__.'/auth.php';
 
