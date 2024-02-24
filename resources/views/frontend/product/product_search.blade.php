@@ -5,7 +5,7 @@
                 <div class="col-lg-4-5">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
-                            <p>We found <strong class="text-brand">{{count($productsa)}}</strong> items for you!</p>
+                            <p>We found <strong class="text-brand">{{count($products)}}</strong> items for you!</p>
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                     <div class="row product-grid">
-                        @foreach($productsa as $product)
+                        @foreach($products as $product)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                                     <div class="product-img-action-wrap">

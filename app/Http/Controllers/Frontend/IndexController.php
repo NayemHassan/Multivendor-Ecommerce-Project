@@ -81,11 +81,13 @@ class IndexController extends Controller
       $request->validate([
          'search' => 'required',
       ]);
-      $item =$request->search;
-    
+      $item = $request->search;
       $category = Categories::orderBy('categories_name','ASC')->limit(5)->get();
       $new_product = Product::where('status',1)->orderBy('id','ASC')->limit(3)->get();
-      $productsa = Product::where('product_name','LIKE',"%item%")->get();
-      return view('frontend.product.product_search',compact('productsa','category','item','new_product'));
+
+      // Concatenate '%' around $item to perform a wildcard search
+      $products = Product::where('product_name', 'LIKE', "%$item%")->get();
+
+      return view('frontend.product.product_search', compact('products', 'item', 'category', 'new_product'));
    }
 }
