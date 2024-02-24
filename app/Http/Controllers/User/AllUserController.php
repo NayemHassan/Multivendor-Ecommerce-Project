@@ -12,6 +12,7 @@ use Image;
 use App\Models\orders;
 use App\Models\OrderItem;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 class AllUserController extends Controller
 {
    public function UserDatails(){
@@ -41,6 +42,7 @@ class AllUserController extends Controller
    }//End Method
    public function OrderInvoice($id){
     $detailsOrder= orders::with('division','district','state')->where('user_id',Auth::user()->id)->where('id',$id)->orderBy('id','DESC')->first();
+    
     $orderItem = OrderItem::with('product','vendor')->where('order_id',$id)->orderBy('id','DESC')->get();
     $pdf = Pdf::loadView('frontend.userdashboard.order_invoice',compact('detailsOrder','orderItem'))->setPaper('a4')->setOption([
         'teamDir' => public_path(), 
@@ -49,4 +51,22 @@ class AllUserController extends Controller
     return $pdf->download('invoice.pdf');
     
    }//End Method
+   public function OrderReturn(Request $request,$return_order){
+         $request->validate([
+            'return_reason' => 'required'
+        ],[
+            'return_reason' => 'Please Give Us Return Reason'
+        ]);
+
+        orders::findOrFail($return_order)->update([
+             'return_reason' => $request->return_reason,
+              'return_date' => Carbon::now()->format('d F Y'),
+              'return_order' => 1,
+        ]);
+        $notification = array(
+            'message' =>'Return reason Send Successfully',
+            'alert-type'=> 'info'
+         );
+        return redirect()->route('user.order.page')->with($notification);
+   }
 }

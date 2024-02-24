@@ -1,12 +1,12 @@
 @extends('frontend.master_dashboard')
 @section('main')
-<div class="page-header breadcrumb-wrap">
+        <div class="page-header breadcrumb-wrap">
             <div class="container">
-                <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+            <div class="breadcrumb">
+                    <a href="#" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> <a href="shop-grid-right.html">{{$vproduct['Brand']['brand_name']}}</a> <span></span> {{$vproduct['Category']['categories_name']}}<span></span> {{$vproduct['SubCategory']['subcategory_name']}}<span></span>{{$vproduct->product_name}}
-                </div>
             </div>
+        </div>
         </div>
         <div class="container mb-30">
             <div class="row">
@@ -24,7 +24,6 @@
                                         </figure>
                                         @endforeach
                                     </div>
-
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails">
                                     @foreach($multiImage as $mImage)
@@ -134,6 +133,13 @@
                                         <li class="mb-5">Product Code : <a href="#">{{$vproduct->product_code}}</a></li>
                                         <li class="mb-5">Tags: <a href="#" rel="tag">{{$vproduct->product_tag}}</a></li>
                                         <li>Stock:<span class="in-stock text-brand ml-5">({{$vproduct->product_qty}}) items in Stock</span></li>
+                                        </ul><br><br>
+                                        <br><br>
+                                        <ul class="d-flex">
+                                            <li class="p-3" id="gmail-btn">
+                                                <a href="">Gmail</a>
+                                            </li>
+                                            
                                         </ul>
                                         </div>
                                 </div>
@@ -488,4 +494,9 @@
                 </div>
             </div>
         </div>
+        <script>
+            const = gmailBtn = document.getElementById('gmail-btn');
+
+          
+        </script>
 @endsection

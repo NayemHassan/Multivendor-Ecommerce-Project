@@ -127,6 +127,14 @@ Route::controller(ProductController::class)->group(function(){
 //Order Pending Route
 Route::controller(OrderController::class)->group(function(){
     Route::get('/pending/order' ,'OrderPending')->name('pending.order');
+    Route::get('/admin/details/order/{id}' ,'AdminDetailsOrder')->name('pending.order.edit');
+    Route::get('/admin/confirmn/order' ,'AllConfirmOrder')->name('all.confirm.order');
+    Route::get('/admin/processing/order' ,'AllProcessingOrder')->name('all.processing.order');
+    Route::get('/admin/deleverd/order' ,'AllDeleveredOrder')->name('all.delevered.order');
+    Route::get('/admin/confirm/order/active/{id}' ,'PendingToConfirm')->name('confirm.order.active');
+    Route::get('/admin/processing/order/active/{id}' ,'ConfirmToProcessing')->name('processing.order.active');
+    Route::get('/admin/delevered/order/active/{id}' ,'ProcessingToDelevered')->name('deleverd.order.active');
+    Route::get('/admin/invoice/dawnload/{id}' ,'AdminInvoiceDawnload')->name('admin.invoicr.dawnload');
    
 });//
 });
@@ -187,7 +195,7 @@ Route::middleware(['auth','role:admin'])->group(function (){
         Route::get('/admin/delete/banner/{slug}' ,'DeleteBanner')->name('banner.delete');
 
     });
-    //All Coupon Routew
+    //All Coupon Route
     Route::controller(CouponController::class)->group(function(){
         Route::get('/admin/coupon/view' ,'AllCouponView')->name('all.coupon');
         Route::get('/admin/addcoupon' ,'AddCoupon')->name('add.coupon');
@@ -223,6 +231,7 @@ Route::middleware(['auth','role:admin'])->group(function (){
         
     });
 });//End Middleware;
+      
     //FrontEnd Route Product
         Route::get('/product/details/{id}/{slug}' ,[IndexController::class,'ProductDetails']);
         Route::get('/vendor/details/{id}' ,[IndexController::class,'VendorDetails'])->name('vendor.details');
@@ -296,11 +305,15 @@ Route::middleware(['auth','role:admin'])->group(function (){
     Route::get('/user/order','UserOrder')->name('user.order.page'); 
     Route::get('/user/order/details/{id}','OrderDetails')->name('user/order/details');  
     Route::get('user/invoice/pdf/{id}','OrderInvoice');  
- 
+    //Returbn Order
+    Route::post('user/order/return/{return_order}','OrderReturn')->name('return.order.message.store');  
     });
 
     });//end middleware    
-
+  //Search Route 
+  Route::controller(IndexController::class)->group(function(){
+    Route::post('/search','ProductSearch')->name('product.search');
+});
 require __DIR__.'/auth.php';
 
 

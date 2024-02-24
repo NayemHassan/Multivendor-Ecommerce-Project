@@ -40,10 +40,9 @@ return new class extends Migration
             $table->string('delivered_date')->nullable();
             $table->string('cancel_date')->nullable();
             $table->string('return_date')->nullable();
+            $table->string('return_order')->default(0)->nullable();
             $table->string('return_reason')->nullable();
-            $table->string('status');
-            
-           
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

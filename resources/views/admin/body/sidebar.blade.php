@@ -138,16 +138,23 @@
 						
 					</ul>
 				</li>
+			
+				
 				<li>
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
-						<div class="menu-title">Pending Order Manage</div>
+						<div class="menu-title">Order Status</div>
 					</a>
 					<ul>
-						<li> <a href="{{route('pending.order')}}"><i class="bx bx-right-arrow-alt"></i>All Pending Order</a>
+					    <li> <a href="{{route('pending.order')}}"><i class="bx bx-right-arrow-alt"></i>All Pending Order</a>
 						</li>
-				        
+						<li> <a href="{{route('all.confirm.order')}}"><i class="bx bx-right-arrow-alt"></i>Confirm Order</a>
+						</li>
+				         <li> <a href="{{route('all.processing.order')}}"><i class="bx bx-right-arrow-alt"></i>Processing Order</a>
+						</li>
+				         <li> <a href="{{route('all.delevered.order')}}"><i class="bx bx-right-arrow-alt"></i>Delivered Order</a>
+						</li>
 						
 					</ul>
 				</li>

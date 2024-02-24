@@ -1,7 +1,8 @@
 @extends('admin.admin_dashboard')
 @section('admin')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<script
+  src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <div class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -77,11 +78,13 @@
 
                                             <a href="{{route('product.delete',$item->id)}}"  class="btn btn-sm btn-danger pb-2" id ="delete" title="Delete Data"><i class="fas fa-trash-alt"></i></a>
                                             <a href=""  class="btn btn-sm btn-info pb-2" title="Eye Data"><i class="fas fa-eye"></i></a>
+											<button href="" class="btn btn-success btnajax"></button>
 											@if( $item->status == 1)
-                                            <a href="{{route('product.inactive',$item->id)}}"  class="btn btn-sm btn-primary pb-2"  title="Inactive Data"><i class="fas fa-thumbs-up"></i></a>
+                                            <a href="{{route('product.inactive',$item->id)}}"  class="btn btn-sm btn-primary pb-2 btn-ajax"  title="Inactive Data"><i class="fas fa-thumbs-up"></i></a>
 											@else
-											<a href="{{route('product.active',$item->id)}}"  class="btn btn-sm btn-primary pb-2"  title="Active Data"><i class="fas fa-thumbs-down"></i></a>
+											<a href="{{route('product.active',$item->id)}}"  class="btn btn-sm btn-primary pb-2 btn-ajax"  title="Active Data"><i class="fas fa-thumbs-down"></i></a>
 											@endif
+
                                         </td>										
 									</tr>
                                  @endforeach
@@ -103,4 +106,12 @@
 					</div>
 				</div>
 			</div>
+		
+<script>
+	jQuery(document).ready(function(){
+		jQuery(document).on("click",".btnajax",function(){
+			alert({{$item->id}});
+		})
+	});
+</script>
 @endsection

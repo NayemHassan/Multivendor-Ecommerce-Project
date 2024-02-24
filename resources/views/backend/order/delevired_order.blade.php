@@ -9,7 +9,7 @@
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">All Pending Order</li>
+								<li class="breadcrumb-item active" aria-current="page">All Delevired Order</li>
 							</ol>
 						</nav>
 					</div>
@@ -17,7 +17,7 @@
 				</div>
 				<!--end breadcrumb-->
 				
-				<h6 class="mb-0 text-uppercase">Pending Order List </h6>
+				<h6 class="mb-0 text-uppercase">Delivered Order List </h6>
 				<hr/>
 				<div class="card">
 					<div class="card-body">
@@ -44,9 +44,10 @@
                                         <span class="badge rounded-pill bg-success">{{$item->status}}</span>
                                         </td>
 										<td>
-                                            <a href="{{route('pending.order.edit',$item->id)}}" class="btn btn-sm btn-warning p-2" title="Edit Data"> <i class="fas fa-eye"></i> </a>
-											<a href="{{route('admin.invoicr.dawnload',$item->id)}}" class="btn btn-sm btn-danger p-2" title="Invoice Pdf Dawnload"> <i class="fa fa-dawnload"></i>Invoice </a>
+                                            <a href="{{route('pending.order.edit',$item->id)}}" class="btn btn-sm btn-warning p-2" title="Pending Data"> <i class="fas fa-eye"></i> </a>
+                                            <a href="{{route('admin.invoicr.dawnload',$item->id)}}" class="btn btn-sm btn-danger p-2" title="Invoice Pdf Dawnload"> <i class="fa fa-dawnload"></i>Invoice </a>
                                          </td>
+										
 									</tr>
                                     @endforeach
 								</tbody>
@@ -65,4 +66,5 @@
 					</div>
 				</div>
 			</div>
+
 @endsection

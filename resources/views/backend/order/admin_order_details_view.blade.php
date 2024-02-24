@@ -1,20 +1,27 @@
-@extends('dashboard')
-@section('user')
+@extends('admin.admin_dashboard')
+@section('admin')
 <div class="page-header breadcrumb-wrap">
-            <div class="container">
-                <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span>Shipping Details
-                </div>
-            </div>
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+					
+					<div class="ps-3">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb mb-0 p-0">
+								<li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+								</li>
+								<li class="breadcrumb-item active" aria-current="page">Admin Order Details</li>
+							</ol>
+						</nav>
+					</div>
+					
+				</div>
         </div>
         <div class="page-content pt-110 pb-150">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 m-auto">
                         <div class="row">
-                          @include('frontend.body.dashboard_side_menu')
-                                    <div class="col-md-5">
+                         
+                                    <div class="col-md-6">
                                     <div class="tab-content account dashboard-content pl-50">
                                   
                                     <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -70,7 +77,7 @@
                                     </div>
                                 </div>
                             </div>
-                              <div class="col-md-4">
+                              <div class="col-md-6">
                                     <div class="tab-content account dashboard-content pl-50">
                                   
                                     <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -108,7 +115,21 @@
                                                        </tr>
                                                        <tr>
                                                             <td ><label>Status</label></td>
-                                                            <td  ><label class="badge rounded-pill bg-warning">{{$detailsOrder->status}}</label></td>
+                                                            <td  ><label class="badge rounded-pill bg-info">{{$detailsOrder->status}}</label></td>
+                                                       </tr>                          
+                                                       <tr>
+                                                            <td ><label></label></td>
+
+                                                            <td>
+                                                                @if($detailsOrder->status =='pending')
+                                                                <a href="{{route('confirm.order.active',$detailsOrder->id)}}" id="confirm_id" class="btn text-light bg-success">Confirm Order</a>
+                                                                @elseif($detailsOrder->status =='confirmed')
+                                                                <a href="{{route('processing.order.active',$detailsOrder->id)}}" id="processing_id"  class="btn text-light bg-success">Processing Order</a>
+                                                                @elseif($detailsOrder->status =='processing')
+                                                                <a href="{{route('deleverd.order.active',$detailsOrder->id)}}" id="delevered_id" class="btn text-light bg-success">Deliver Order</a>
+                                                                @endif
+                                                                
+                                                            </td>
                                                        </tr>                          
                                                         </tbody>
                                                     </table>
@@ -118,7 +139,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                                     <div class="tab-content account dashboard-content pl-50">
                                     <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                         <div class="card">
@@ -178,46 +199,15 @@
                                 </div>
                             </div>
                            <!-- ///////// -->
-                           @if($detailsOrder->status != "deliverd")
-                           @else 
-                           @php
-                            $order = App\Models\orders::where('id',$detailsOrder->id)->where('return_reason', '=','NULL')->first();
-                           @endphp
-                           @if($order)
-                           <div class="col-md-9">
-                                    <div class="tab-content account dashboard-content pl-50">
-                                    <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-                                        <div class="card">
-                                        <div class="card-header">
-                                                <h3 class="mb-0">Return Product</h3>
-                                            </div>
-                                           <form action="{{route('return.order.message.store',$detailsOrder->id)}}" method="post">
-                                            @csrf
-                                            <div class="form-group">
-                                            <label for="">Enter Retarn Reason</label>
-
-                                            <textarea name="return_reason" class="form-control @error('return_reason') is-invalid @enderror"></textarea><br>
-                                            @error('return_reason')
-                                            <div class="alert alert-danger">{{ $message }}</div>
-                                             @enderror
-                                            <button type="submit" class="btn btn-success">Return Order</button>
-                                            </div>
-                                           </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @else
-                            <div class="col-md-4">
-                            <h5 class="badge badge-pill bg-danger p-3 h2" style="font-size:20px">You Alredy Sumbmited Return Reason</h5>
-                            </div>
-                            @endif
-                           <!-- ////////// -->
-                           @endif
+                      
                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- //Sweet alert Confirm Order -->
+
+       
 @endsection

@@ -1,28 +1,11 @@
 @extends('frontend.master_dashboard')
 @section('main')
-
-<div class="page-header mt-30 mb-50">
-            <div class="container">
-                <div class="archive-header">
-                    <div class="row align-items-center">
-                        <div class="col-xl-3">
-                            <h1 class="mb-15">{{$cat_name->categories_name}}</h1>
-                            <div class="breadcrumb">
-                                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                                <span></span> {{$cat_name->categories_name}}
-                            </div>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container mb-30">
             <div class="row flex-row-reverse">
                 <div class="col-lg-4-5">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
-                            <p>We found <strong class="text-brand">{{count($products)}}</strong> items for you!</p>
+                            <p>We found <strong class="text-brand">{{count($productsa)}}</strong> items for you!</p>
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
@@ -66,7 +49,7 @@
                         </div>
                     </div>
                     <div class="row product-grid">
-                        @foreach($products as $product)
+                        @foreach($productsa as $product)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                 <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                                     <div class="product-img-action-wrap">
@@ -106,7 +89,7 @@
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 80%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (3.5)</span>
+                                            <span class="font-small ml-5 text-muted">(3.5)</span>
                                         </div>
                                         <div>
                                             
@@ -120,7 +103,6 @@
                                         </div>
                                         <div class="product-card-bottom">
                                            
-
                                             <div class="product-price">
                                             @if($product->discount_price ==NULL)
                                                 <span>${{$product->selling_price}}</span>
@@ -141,8 +123,7 @@
                             </div>
                         @endforeach
                         <!--end product card-->
-                        <!--end product card-->
-                        
+        
                     </div>
                     <!--product grid-->
                     <div class="pagination-area mt-20 mb-20">
@@ -163,8 +144,7 @@
                         </nav>
                     </div>
                     
-                    <!--End Deals-->
-            
+                    <!--End Deals--> 
                 </div>
                 <div class="col-lg-1-5 primary-sidebar sticky-sidebar">
                     <div class="sidebar-widget widget-category-2 mb-30">

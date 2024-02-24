@@ -35,6 +35,7 @@ class IndexController extends Controller
     $multiImage = Multi_Img::where('product_id',$id)->get();
     $productCat = $vproduct->category_id;
     $relatedProduct = Product::where('category_id',$productCat)->where('id','!=',$id)->orderBy('id','DESC')->limit(4)->get();
+ 
     return view('frontend.product.product_details',compact('vproduct','checkSize','checkColor','multiImage','relatedProduct'));
    }//End Method
    public function VendorDetails($id){
@@ -76,4 +77,15 @@ class IndexController extends Controller
       'size' =>$product_size ,
     )); 
    }//End Method
+   public function ProductSearch(Request $request){
+      $request->validate([
+         'search' => 'required',
+      ]);
+      $item =$request->search;
+    
+      $category = Categories::orderBy('categories_name','ASC')->limit(5)->get();
+      $new_product = Product::where('status',1)->orderBy('id','ASC')->limit(3)->get();
+      $productsa = Product::where('product_name','LIKE',"%item%")->get();
+      return view('frontend.product.product_search',compact('productsa','category','item','new_product'));
+   }
 }

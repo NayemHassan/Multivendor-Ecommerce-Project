@@ -48,12 +48,15 @@
                                                                 <td class="text-center">
                                                                     @if($orderInfo->status =="pending")
                                                                     <span  class="badge  rounded-pill btn-small bg-warning ">Pending</span>
-                                                                    @elseif($orderInfo->status=='confirm') 
+                                                                    @elseif($orderInfo->status=='confirmed') 
                                                                     <span  class="badge  rounded-pill btn-small bg-info">Confirm</span>   
                                                                     @elseif($orderInfo->status=="processing") 
                                                                     <span  class="badge  rounded-pill btn-small bg-danger">Processing</span>   
                                                                     @elseif($orderInfo->status=='deliverd')    
                                                                     <span  class="badge  rounded-pill btn-small bg-success">Delivered</span>
+                                                                    @if($orderInfo->return_order == 1)
+                                                                   <a href="#" class="badge badge-pill bg-danger">Return</a>
+                                                                    @endif
                                                                     @endif
                                                                 </td>
                                                                 <td class="text-center">
