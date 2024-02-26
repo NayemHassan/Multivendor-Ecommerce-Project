@@ -158,7 +158,7 @@
 						
 					</ul>
 				</li>
-				<li class="menu-label">UI Elements</li>
+				<li class="menu-label">Vendor</li>
 
 				<li>
 					<a href="javascript:;" class="has-arrow">
@@ -174,12 +174,21 @@
 						
 					</ul>
 				</li>
+				<li class="menu-label">Role & Permission</li>
 				<li>
-					<a href="widgets.html">
-						<div class="parent-icon"><i class='bx bx-cookie'></i>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class="bx bx-category"></i>
 						</div>
-						<div class="menu-title">Widgets</div>
+						<div class="menu-title">Role And Permission</div>
 					</a>
+					<ul>
+						<li> <a href="{{route('all.permission')}}"><i class="bx bx-right-arrow-alt"></i>All Permission</a>
+						</li>
+						<li> <a href="{{route('all.role')}}"><i class="bx bx-right-arrow-alt"></i>All Role</a>
+						<li> <a href="{{route('add.role.permission')}}"><i class="bx bx-right-arrow-alt"></i>Role in Permission</a>
+						</li>
+						
+					</ul>
 				</li>
 				<li>
 					<a href="javascript:;" class="has-arrow">

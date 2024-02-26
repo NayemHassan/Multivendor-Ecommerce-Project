@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\FilterController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishListController;
 use App\Http\Controllers\User\CompareController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\User\AllUserController;
+use App\Http\Controllers\Backend\RoleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -230,6 +232,28 @@ Route::middleware(['auth','role:admin'])->group(function (){
         Route::get('/admin/delete/state/{id}' ,'DeleteState')->name('delete.state');
         
     });
+     // Permission All Route
+     Route::controller(RoleController::class)->group(function(){
+       Route::get('/all/permission' ,'AllPermission')->name('all.permission');
+       Route::get('/add/permission' ,'AddPermission')->name('add.permission');
+       Route::post('/store/permission' ,'StorePermission')->name('store.permission');
+       Route::get('/edit/permission/{id}', 'EditPermission')->name('edit.permission');
+       Route::post('/update/permission/{id}', 'UpdatePermission')->name('update.permission');
+       Route::get('/delete/permission/{id}', 'DeletePermission')->name('delete.permission');
+   
+    });
+     // Roles All  Route
+     Route::controller(RoleController::class)->group(function(){
+       Route::get('/all/role' ,'AllRole')->name('all.role');
+       Route::get('/add/role' ,'AddRole')->name('add.role');
+       Route::post('/store/role' ,'StoreRole')->name('store.role');
+       Route::get('/edit/role/{id}', 'EditRole')->name('edit.role');
+       Route::post('/update/role/{id}', 'UpdateRole')->name('update.role');
+       Route::get('/delete/role/{id}', 'DeleteRole')->name('delete.role');
+        //All Role in permission Route
+        Route::get('/add/role/permission' ,'AddRolePermission')->name('add.role.permission');
+       });
+   
 });//End Middleware;
       
     //FrontEnd Route Product
@@ -315,6 +339,10 @@ Route::middleware(['auth','role:admin'])->group(function (){
     Route::post('/search','ProductSearch')->name('product.search');
     Route::post('/search-product','ProductSearchAjax')->name('product.search.ajax');
     
+});
+  Route::controller(FilterController::class)->group(function(){
+    Route::get('/shop/page','ShopPage')->name('shop.page');
+    Route::get('/shop/filter','ShopFilter')->name('shop.filter');
 });
 require __DIR__.'/auth.php';
 

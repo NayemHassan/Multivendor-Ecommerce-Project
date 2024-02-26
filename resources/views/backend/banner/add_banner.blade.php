@@ -33,7 +33,7 @@
                     <h6 class="mb-0">Banner Name</h6>
                 </div>
                 <div class="col-sm-9 text-secondary form-group" bis_skin_checked="1">
-                    <input type="text" name="banner_name" class="form-control" value="">
+                    <input type="text" name="banner_name" class="form-control" value="{{old('banner_name')}}">
 
                 </div>
               </div>
